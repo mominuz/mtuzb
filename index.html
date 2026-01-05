@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Winter Search + Videos + Audio + Widgets</title>
+<style>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: system-ui, sans-serif;
+}
+body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 25px;
+    overflow: hidden;
+    background:
+        linear-gradient(rgba(0,0,0,.45), rgba(0,0,0,.45)),
+        url("bg.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+/* ❄️ SNOW */
+.snow {
+    position: fixed;
+    inset: -100% 0 0 0;
+    height: 200%;
+    background-image:
+        radial-gradient(2px 2px at 20px 30px, white, transparent),
+        radial-gradient(2px 2px at 100px 150px, white, transparent),
+        radial-gradient(1px 1px at 200px 80px, white, transparent),
+        radial-gradient(3px 3px at 300px 200px, white, transparent),
+        radial-gradient(1px 1px at 400px 50px, white, transparent);
+    background-size: 500px 500px;
+    animation: snow 18s linear infinite;
+    pointer-events: none;
+}
+@keyframes snow {
+    to { transform: translateY(50%); }
+}
+
+/* 🔍 SEARCH */
+.input {
+    z-index: 2;
+    width: 320px;
+    padding: 14px 18px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    background: #f2f2f2;
+    font-size: 16px;
+    transition: 0.35s ease;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+.input:hover { transform: scale(1.06); }
+.input:focus {
+    background: #111;
+    color: #fff;
+    box-shadow:
+        0 0 10px #ffbe0b,
+        0 0 25px #ffbe0b,
+        0 0 50px #ffbe0b;
+}
+.input::placeholder { color: #888; transition: color 0.35s; }
+.input:focus::placeholder { color: #fff; }
+
+/* 💎 INFO CARD */
+.card {
+    z-index: 2;
+    width: 320px;
+    padding: 18px;
+    border-radius: 18px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(14px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+}
+
+/* 🎥 VIDEO COMPONENTS */
+.video-box, .video-box2 {
+    width: 490px; /*tvboxni  boyi */
+    border-radius: 360px;  /*tvboxni  burchagi bu yoyma tortburchk emas */
+    overflow: hidden;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    z-index: 3;
+}
+.video-box { position: fixed; top: 20px; left: 20px; }  /* birinchi videovoxni ekrandagi pzitsiyasi*/
+.video-box2 { position: fixed; bottom: 20px; left: 20px; } /* ikkinnchi videovoxni ekrandagi pzitsiyasi*/
+.video-box video, .video-box2 video { width: 100%; height: auto; display: block; }
+
+/* 🎵 AUDIO PLAYER (TOP RIGHT) */
+.audio-box {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    width: 260px;
+    padding: 12px;
+    border-radius: 16px;
+    overflow: hidden;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.25);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    z-index: 3;
+}
+.audio-box audio { width: 100%; }
+
+/* ☁️ WEATHER WIDGET (BOTTOM RIGHT) */
+.weather-box {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 220px;
+    padding: 14px;
+    border-radius: 16px;
+    background: rgba(255,255,255,0.15);
+    backdrop-filter: blur(12px);
+    border: 1px solid rgba(255,255,255,0.25);
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0,0,0,0.35);
+    z-index: 3;
+}
+</style>
+</head>
+<body>
+
+<div class="snow"></div>
+
+<!-- 🎥 VIDEO 1 (TOP LEFT) -->
+<div class="video-box">
+    <video src="https://s04.watcher.uz/59/video.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250cmFjdF9pZCI6MjcwMTc3LCJsb2dpbiI6InR2LTI3MDE3NyIsInRlbXBvcmFyeSI6ZmFsc2UsImlzX29hdXRoIjpmYWxzZSwiY3JlYXRlZF90aW1lIjoxNjUwMjgzMDI3fQ.LadLj4b6plIxTGCWntQQqsQGZ3R9EsvwhaXQd1sur2g%3A15" controls autoplay muted playsinline></video>
+</div>
+
+<!-- 🎥 VIDEO 2 (BOTTOM LEFT) -->
+<div class="video-box2">
+    <video src="https://s07.watcher.uz/163/video.m3u8?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJjb250cmFjdF9pZCI6MjcwMTc3LCJsb2dpbiI6InR2LTI3MDE3NyIsInRlbXBvcmFyeSI6ZmFsc2UsImlzX29hdXRoIjpmYWxzZSwiY3JlYXRlZF90aW1lIjoxNjUwMjgzMDI3fQ.LadLj4b6plIxTGCWntQQqsQGZ3R9EsvwhaXQd1sur2g%3A15" controls autoplay muted playsinline></video>
+</div>
+
+<!-- 🎵 AUDIO PLAYER (TOP RIGHT) -->
+<div class="audio-box">
+    <audio controls autoplay loop>
+        <source src="https://2000s.radiomonster.fm/ultra" type="audio/mpeg">
+        Sizning brauzeringiz audio tagini qo'llab-quvvatlamaydi.
+    </audio>
+</div>
+
+<!-- ☁️ WEATHER WIDGET (BOTTOM RIGHT) -->
+<div class="weather-box">
+    <h4>☁️ Toshkent</h4>
+    <p>Havo harorati: 5°C</p>
+    <p>Qor yog‘ishi mumkin 05.01.2026 ❄️</p>
+</div>
+
+<!-- 🔍 GOOGLE SEARCH -->
+<form action="https://www.google.com/search" method="GET" target="_blank">
+    <input type="text" name="q" class="input" placeholder="Google’da qidirish..." autofocus>
+</form>
+
+<!-- 💎 CARD -->
+<div class="card">
+    <h3>❄️ Qishki Qidiruv</h3>
+    <p>Matn yozing va Enter bosing</p>
+</div>
+
+</body>
+</html>
